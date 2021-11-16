@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>Data in table</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th>product</th>
+            <th>amount</th>
+        </thead>
+        <tbody id="tbody">
+            <tr>
+                
+            </tr>
+        </tbody>
+    </table>
+
+    <script id="MainScript">
+        var firebaseConfig = {
+            apiKey: "AIzaSyA4ns3P2NG3FdVCaVW2akjwAKy5EgM7dmE",
+            authDomain: "testa2f-774f4.firebaseapp.com",
+            projectId: "testa2f-774f4",
+            storageBucket: "testa2f-774f4.appspot.com",
+            messagingSenderId: "29542149729",
+            appId: "1:29542149729:web:aa9b7ef6ec601001ef4420",
+            measurementId: "G-J3ZG6Y2VXQ"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function SelectAllData(){
+            firebase.database().ref('item').once('value',
+            function(AllRecords){
+                AllRecords.forEach(
+                    function(CurrentRecord){
+                        var product = CurrentRecord.val().product;
+                        var amount = CurrentRecord.val().amount;
+                        AddItemTotable(product,amount);
+                    }
+                );
+            });
+        }
+        window.onload = SelectAllData;
+
+        var itenNo = 0;
+        function AddItemTotable(product,amount){
+            
+        }
+
+    </script>
+
+</body>
+
+</html>
