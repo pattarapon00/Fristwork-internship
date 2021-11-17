@@ -11,6 +11,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import {CrudService} from './service/crud.service';
 
+import { ReactiveFormsModule } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -22,8 +25,14 @@ import {CrudService} from './service/crud.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+
+    ReactiveFormsModule,
   ],
   providers: [CrudService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  form = new FormGroup({
+    newValue: new FormControl('')
+})
+}

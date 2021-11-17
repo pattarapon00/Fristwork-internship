@@ -13,14 +13,15 @@
 <body>
 
   <div class="container-fluid text-center p-5 bg-info text-white text-center">
-    <h1>list of items in the refrigerator</h1>
+    <h1>list of items in backpack</h1>
     <p class="text-primary"></p>
   </div>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="row justiyf-content-center p-2 ">
       <h1>items in the refrigerator</h1>
     </div>
+
     <div class="form-group mb-3 ">
       <input type="text" class="form-control" [(ngModel)]="product" placeholder="Product">
     </div>
@@ -33,67 +34,68 @@
     <div class="form-group">
       <h4><b>{{message}}</b></h4>
     </div>
-  </div>
-  <!-- <div class="container mt-3">
-    <h2>List</h2>
-    <form (ngSubmit)="addmyapp(MyAppForm)" #MyAppForm="ngForm">
-      <div class="mb-3 mt-3">
-        <label for="product">Product:</label>
-        <input type="text" class="form-control" id="product" placeholder="Name" name="product" ngModel>
-      </div>
-      <div class="mb-3">
-        <label for="amount">Amount:</label>
-        <input type="number" class="form-control" id="amount" placeholder="0" name="amount" ngModel #input>
-        <button type="submit" class="btn btn-primary" (click)="saveData(input.value)"> Submit </button>
-        <hr>
-        <ul>
-          <li *ngFor="let item of data"> {{item}} </li>
-        </ul>
-      </div>
 
+
+  </div> -->
+
+
+  <div class="container mt-3 ">
+    <!-- Submit -->
+    <form [formGroup]="form" *ngIf="form">
+      <input placeholder="New item" formControlName="newValue" type="text" class="input-field col s12" />
+      <button (click)="onSubmit()">
+        Submit
+      </button>
     </form>
-  </div> -->
+
+    <!-- Query -->
+    <form [formGroup]="secondForm" *ngIf="secondForm">
+      <input placeholder="Looking for?" formControlName="valueToGet" type="text" class="input-field col s12" />
+      <button (click)="onQuery()">
+        Query
+      </button>
+    </form>
+
+    <!-- Text ถ้าไม่มี-->
+    <p style="color: red;">{{message1|| null}}</p>
+
+    <div *ngIf="single">
+      <h1>{{single.field}}</h1>
+      <button style='background-color: lightblue' (click)='openEdit()'>Edit</button>
+      <button style="background-color: red" (click)='delete()'>Delete</button>
+
+    </div>
 
 
-  <!-- <div class="container mt-3">
-    <h2>items in the refrigerator</h2>
+  </div>
 
-    <table class="table table-bordered table-sm">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Amount</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>---</td>
-          <td>---</td>
-          <td>---</td>
-        </tr>
-        <tr>
-          <td>---</td>
-          <td>---</td>
-          <td>---</td>
-        </tr>
-        <tr>
-          <td>---</td>
-          <td>---</td>
-          <td>---</td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
+  <!-- กล่องข้อความที่ให้อัพเดต -->
+  <form *ngIf="edit" [formGroup]="editForm">
+    <input placeholder="{{single.field}}" formControlName="replaceValue" type="text" class="input-field col s12" />
+    <button (click)="onRename()">
+      Update
+    </button>
+  </form>
 
-  <ul>
-    <li *ngFor='let doc of myArray'>
-      {{doc.item}},
-      {{doc.item}},
-      {{doc.item}},
-      
-    </li>
-  </ul>
+  <p style="color: red;">{{message2 || null}}</p>
+
+
+  <!--แสดง item-->
+  <div class="container mt-3">
+    <h2>items in backpack</h2>
+    <ul>
+      <li *ngFor="let doc of myArray">
+        {{doc.field}}
+
+      </li>
+    </ul>
+  </div>
+
+
+
+
+
+
 
 </body>
 
