@@ -26,23 +26,26 @@ export class AppComponent {
   message1!: string;
   edit: boolean = false;
   message2!: string;
-  editForm: any;
+  
+
+
+  editForm = new FormGroup({
+    replaceValue: new FormControl('')
+  })
 
   form = new FormGroup({
-    newValue: new FormControl()
-  });
+    newValue: new FormControl('')
+  })
 
-  secondForm = new FormGroup({ 
-    valueToGet: new FormControl() 
-  });
+  secondForm = new FormGroup({
+    valueToGet: new FormControl('')
+  })
 
 
   constructor(
     public crudservice: CrudService,
     private firestore: AngularFirestore,
-  ) {
-
-  }
+  ) { }
 
   // CreateRecord() {
   //   let Record = {
@@ -112,17 +115,17 @@ export class AppComponent {
     //update
     const docRef = this.firestore.collection('Item', ref => ref.where("field", "==", this.secondForm.value.valueToGet));
 
-    docRef.get().subscribe(ss => {
-      if (ss.docs.length === 0) {
-        this.message1 = 'Document is Update!';
-        this.single = null;
-      } else {
-        ss.docs.forEach(doc => {
-          this.message1 = '';
-          this.single = doc.data();
-        })
-      }
-    })
+    // docRef.get().subscribe(ss => {
+    //   if (ss.docs.length === 0) {
+    //     this.message1 = 'Document is Update!';
+    //     this.single = null;
+    //   } else {
+    //     ss.docs.forEach(doc => {
+    //       this.message1 = '';
+    //       this.single = doc.data();
+    //     })
+    //   }
+    // })
 
     docRef.snapshotChanges().forEach((changes) => {
       changes.map((a) => {
@@ -149,10 +152,10 @@ export class AppComponent {
 
   delete() {
     if (confirm('Delete?')) {
-        this.firestore.collection('Item').doc(this.id).delete();
-        this.edit = false;
-        this.single = null;
+      this.firestore.collection('Item').doc(this.id).delete();
+      this.edit = false;
+      this.single = null;
     }
-}
+  }
 
 }
